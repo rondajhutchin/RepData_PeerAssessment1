@@ -52,10 +52,28 @@ ActivityData$DateTime<- as.POSIXct(ActivityData$date, format="%Y-%m-%d")
 
 ## What is the average daily activity pattern?
 
+## Requirement 4: Time series plot of the average number of steps taken
+
+
+## Requirement 5: The 5-minute interval that, on average, contains the maximum number of steps
+
+
 
 
 ## Imputing missing values
 
+## Requirement 6: Code to describe and show a strategy for imputing missing data
+
+
+## Requirement 7: Histogram of the total number of steps taken each day after missing values are imputed
+
+
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+## Requirement 8: Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
+
+
+
+## Requirement 9: All of the R code needed to reproduce the results (numbers, plots, etc.) in the report is in this RMD file.
