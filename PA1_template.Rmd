@@ -47,7 +47,7 @@ summary(ActivityData)
 ```{r}
 ActivityDataStepsByDay <- with(ActivityData, aggregate(steps, by = list(date), FUN = sum, na.rm = TRUE))
 names(ActivityDataStepsByDay) <- c("date", "steps")
-hist(ActivityDataStepsByDay$steps, main = "Total Number of Steps Taken per Day", xlab = "Total Steps per Dy", col = "red", ylim = c(0,20), breaks = 10)
+hist(ActivityDataStepsByDay$steps, main = "Total Number of Steps Taken per Day", xlab = "Total Steps per Day", col = "red", ylim = c(0,20), breaks = 10)
 ```
 
 
@@ -77,12 +77,31 @@ ActivityDataInterval[which.max(ActivityDataInterval$mean), ]$interval
 
 
 ## Imputing missing values
-
 ## Requirement 6: Code to describe and show a strategy for imputing missing data
+## Determine how many rows have na
+## use match to get the mean of the interval data used in requirement 4 and 5
+## use transform to select mean of internal data for NA OR actual steps and SUM
+```{r}
+nrow(ActivityData[is.na(ActivityData$steps),])
+
+ForNASteps <- ActivityDataInterval$mean[match(ActivityData$interval, ActivityDataInterval$interval)]
+
+ActivityDataWithoutNA <- transform(ActivityData, steps = ifelse(is.na(ActivityData$steps), yes = ForNASteps, no = ActivityData$steps))
+
+ActivityDataTotal <- aggregate(steps ~ date, ActivityDataWithoutNA, sum)
+```
 
 
 ## Requirement 7: Histogram of the total number of steps taken each day after missing values are imputed
+## Same histogram as before with green and get the mean and median
+```{r}
+names(ActivityDataTotal) <- c("date", "steps")
 
+hist(ActivityDataTotal$steps, main = "Total Number of Steps Taken per Day", xlab = "Total Steps per Day", col = "green", ylim = c(0,20), breaks = 10)
+
+mean(ActivityDataTotal$steps)
+median(ActivityDataTotal$steps)
+```
 
 
 
