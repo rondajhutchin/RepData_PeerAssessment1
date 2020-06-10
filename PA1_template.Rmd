@@ -35,17 +35,27 @@ library(plyr)
 
 ActivityData <- read.csv("activity.csv")
 ActivityData$day <- weekdays(as.Date(ActivityData$date))
-ActivityData$DateTime<- as.POSIXct(ActivityData$date, format="%Y-%m-%d")
+ActivityData$date <- as.POSIXct(ActivityData$date, format="%Y-%m-%d")
+summary(ActivityData)
 ```
 
 
 
 ## What is mean total number of steps taken per day?
-## Requirement 2: Histogram of the total number of steps taken each day
-
+## Requirement 2: Histogram of the total number of steps taken each day 
+## use na.rm = TRUE to remove NA 
+```{r}
+ActivityDataStepsByDay <- with(ActivityData, aggregate(steps, by = list(date), FUN = sum, na.rm = TRUE))
+names(ActivityDataStepsByDay) <- c("date", "steps")
+hist(ActivityDataStepsByDay$steps, main = "Total Number of Steps Taken per Day", xlab = "Total Steps per Dy", col = "red", ylim = c(0,20), breaks = 10)
+```
 
 
 ## Requirement 3: Mean and median number of steps taken each day
+```{r}
+mean(ActivityDataStepsByDay$steps)
+median(ActivityDataStepsByDay$steps)
+```
 
 
 
