@@ -59,10 +59,15 @@ median(ActivityDataStepsByDay$steps)
 
 
 
-
 ## What is the average daily activity pattern?
-
 ## Requirement 4: Time series plot of the average number of steps taken
+## remove na
+```{r}
+ActivityDataInterval <- aggregate(ActivityData$steps, by=list(ActivityData$interval), FUN=mean, na.rm=TRUE)
+names(ActivityDataInterval) <- c("interval", "mean")
+plot(ActivityDataInterval$interval, ActivityDataInterval$mean, type = "l", xlab="Interval",  main = "Average Number of Steps per Interval", ylab = "Average Number of Steps")
+```
+
 
 
 ## Requirement 5: The 5-minute interval that, on average, contains the maximum number of steps
