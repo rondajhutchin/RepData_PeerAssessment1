@@ -69,9 +69,10 @@ plot(ActivityDataInterval$interval, ActivityDataInterval$mean, type = "l", xlab=
 ```
 
 
-
 ## Requirement 5: The 5-minute interval that, on average, contains the maximum number of steps
-
+```{r}
+ActivityDataInterval[which.max(ActivityDataInterval$mean), ]$interval
+```
 
 
 
