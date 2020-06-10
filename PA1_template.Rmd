@@ -23,19 +23,30 @@ The variables included in this dataset are:
 
 
 
-## Loading and preprocessing the data
-## unzip the file and place in your working directory
+## Requirement 1: Code for reading in the dataset and/or processing the data
+## unzip the raw data file and place in your working directory
+## Keep the copy of the raw data before processing in the repository
 ```{r, message=FALSE}
 library(data.table)
 library(ggplot2)
 library(scales)
 library(lubridate)
 library(plyr)
+
+ActivityData <- read.csv("activity.csv")
+ActivityData$day <- weekdays(as.Date(ActivityData$date))
+ActivityData$DateTime<- as.POSIXct(ActivityData$date, format="%Y-%m-%d")
 ```
 
 
 
 ## What is mean total number of steps taken per day?
+## Requirement 2: Histogram of the total number of steps taken each day
+
+
+
+## Requirement 3: Mean and median number of steps taken each day
+
 
 
 
