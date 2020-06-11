@@ -106,8 +106,20 @@ median(ActivityDataTotal$steps)
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-
 ## Requirement 8: Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
+## use weekdays to determine day of week and ifelse to set day of week to Weekend or Weekday
+## use ggplot2 library to plot both day types
+```{r}
+ActivityDataWithoutNA$weekday <- weekdays(ActivityDataWithoutNA$date)
+
+ActivityDataWithoutNA$DayType <- ifelse(ActivityDataWithoutNA$weekday=='Saturday' | ActivityDataWithoutNA$weekday=='Sunday', 'Weekend','Weekday')
+
+ActivityDataByDayType <- aggregate(steps~interval+DayType, data=ActivityDataWithoutNA, FUN=mean)
+
+ggplot(ActivityDataByDayType, aes(interval, steps)) + geom_line() + facet_grid(DayType ~ .) +
+        xlab("Interval") + ylab("Average Number of Steps") + ggtitle("Weekday vs Weekend: Average Number of Steps")
+```
+
 
 
 
